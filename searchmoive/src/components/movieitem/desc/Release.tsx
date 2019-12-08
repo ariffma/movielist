@@ -1,9 +1,10 @@
 import React from "react"
 
 function Release(props:any) {
+    const release = props.value.slice(0, -6);
     return(
         <div className="MovieItem__desc__release">
-            <p> 0000 </p>
+            <p>{release}</p>
         </div>
     )
 }
