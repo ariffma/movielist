@@ -2,8 +2,145 @@ body
     background-color: $bright
     color: $dark
     margin: 0
+    header
+        width: calc(100% - #{$padding*2})
+        position: fixed
+        z-index: 3
+        top: 0
+        border-bottom: 1px solid $dark2
+        padding: $padding
+        background-color: $bright
+        box-shadow: $shadow
+        .search
+            display: flex
+            flex-direction: column
+            position: relative
+            &__field
+                input
+                    @include font-size(40)
+                    line-height: normal
+                    flex: 1
+                    outline: none
+                    border: none
+                    color: $dark
+                    background: transparent
+                    &::placeholder
+                        opacity: 0.2
+    main
+        padding-top: 173px
+
+p
+    @include font-size(14)
+    font-weight: 100
+    margin: 0 0 $margin/6 0
+    &:last-child
+        margin: 0
+    &.right
+        text-align: right
+    a
+        color: inherit
+        text-decoration: none
+        transition: color 0.4s ease-in-out
+        &:hover
+            text-decoration: none
+
+.MovieList
+    display: flex
+    flex-wrap: wrap
+    padding: $padding/2 $padding
+
+.MovieItem
+    margin: $margin/2 $margin/4
+    flex: 1 0 21%
+    &__deets
+        display: flex
+        justify-content: center
+        &__votes
+            position: relative
+            width: $standard_big
+            min-width: $standard_big
+            height: $standard_big
+            display: flex
+            justify-content: center
+            p
+                text-align: center
+                color: $dark
+                position: relative
+                text-decoration: none
+                z-index: 2
+                @include font-size(20)
+                line-height: normal
+                display: flex
+                flex-direction: column
+                justify-content: center
+                span
+                    color: $dark3
+                    @include font-size(10)
+                    line-height: normal
+            &:after
+                content: ''
+                width: 100%
+                height: 100%
+                border-radius: 50%
+                background-color: #fff 
+                display: block
+                position: absolute
+                z-index: 1
+                top: 0
+                left: 0
+                box-shadow: $shadow
+    &__poster
+        margin-top: calc(#{$margin_big/2}* -1)
+        background-color: $bright
+        box-shadow: $shadow
+        padding: $padding/3
+        border-radius: $radius
+        img
+            width: 100%
+    &__genres
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        margin-top: calc(#{$margin/3.5} * -1)
+        &__genre
+            padding: $padding/24 $padding/6 $padding/12 $padding/6
+            background-color: $dark2
+            border-radius: $radius
+            margin: $margin/12
+            span
+                @include font-size(9)
+                color: $dark3
+    &__desc
+        padding: $padding/6 $padding/3
+        &__title
+            p
+                @include font-size(20)
+                line-height: normal
+                color: $dark
+        &__release
+            padding-bottom: 5px
+            p
+                @include font-size(12)
+                line-height: normal
+                color: $dark
+
 
 @media (prefers-color-scheme: dark)
     body
         background-color: $dark
         color: $bright
+        header
+            background-color: $dark
+            .search
+                &__field
+                    input
+                        color: $bright
+    .MovieItem
+        &__deets
+            &__votes
+                p
+                    color: $dark
+                &:after
+                    background-color: $bright
+        &__poster
+            background-color: $bright
