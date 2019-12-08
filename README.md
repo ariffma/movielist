@@ -1,2 +1,2 @@
 # movielist
-Movie Listing (Hmlet Technical Test)
+Movie Listing (Technical Test)
