@@ -90,9 +90,7 @@ class Search extends React.Component<any, any> {
                 <div className="MovieList">
                     { results.map((res: any) => {
                         return(
-                            <div className="MovieList">
-                                <MovieItem key={res.id} value={res} />
-                            </div>
+                            <MovieItem key={res.id} value={res} genre={this.state.genre}  />
                         )
                     }) }
                  </div>
