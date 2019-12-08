@@ -1,0 +1,13 @@
+// Google Font: Merriweather & Montserrat
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Montserrat:400,400i&display=swap')
+
+// Default sizing
+$base-font-size: 14 !default
+$base-line-height: 1.5 !default
+
+// Mixins
+@mixin font-size($size-in-px, $line-height:1.5)
+    font-size: $size-in-px * 1px
+    font-weight: 100
+    font-family: 'Montserrat', sans-serif
+    line-height: (($size-in-px / $base-font-size) * $line-height) * 1em
