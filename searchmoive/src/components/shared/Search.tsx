@@ -1,5 +1,7 @@
 import React from "react"
 import axios from 'axios'
+
+import MovieItem from '../movieitem/MovieItem'
 // import Pagination from './Pagination'
 
 const _url = 'https://api.themoviedb.org/3/search/movie'
@@ -71,7 +73,9 @@ class Search extends React.Component<any, any> {
                 <div className="MovieList">
                     { results.map((res: any) => {
                         return(
-                            <p key={res.id}> {res.title}</p>
+                            <div className="MovieList">
+                                <MovieItem key={res.id} value={res} />
+                            </div>
                         )
                     }) }
                  </div>
