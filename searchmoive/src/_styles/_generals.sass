@@ -26,8 +26,23 @@ body
                     background: transparent
                     &::placeholder
                         opacity: 0.2
+            &__feedback
+                position: absolute
+                width: 100%
+                bottom: -20px
+                p
+                    @include font-size(12)
+                    &.message
+                        color: $dark
+                    &.loading
+                        color: $dark2
     main
         padding-top: 173px
+
+.hide
+    display: none
+.show
+    display: block
 
 p
     @include font-size(14)

@@ -2,7 +2,7 @@ import React from "react"
 import axios from 'axios'
 
 import MovieItem from '../movieitem/MovieItem'
-// import Pagination from './Pagination'
+import Pagination from './Pagination'
 
 const _url = 'https://api.themoviedb.org/3/search/movie'
 const _genre = 'https://api.themoviedb.org/3/genre/movie/list'
@@ -18,6 +18,9 @@ class Search extends React.Component<any, any> {
             genre: [],
             message: '',
             loading: false,
+            totalRes: 0,
+            totalPage: 0,
+            currentPage: 0
         }
         this.fetchGenres()
     }
@@ -33,11 +36,16 @@ class Search extends React.Component<any, any> {
             cancelToken: cancel.token
         })
             .then((res: any) => {
+                const total = res.data.total_results
+                const pageCount = res.data.total_pages
                 const resEmpty =! res.data.results.length ? 'No Results' : ''
                 this.setState({
                     results: res.data.results,
                     loading: false,
-                    message: resEmpty
+                    message: resEmpty,
+                    totalRes: total,
+                    totalPage: pageCount,
+                    currentPage: pageNum
                 })
             })
             .catch((err: any) => {
@@ -98,8 +106,22 @@ class Search extends React.Component<any, any> {
         }
     }
 
+    handlePageClick = (type: string) => {
+        const newPageNum = 'prev' === type? this.state.currentPage - 1 : this.state.currentPage + 1
+        if(!this.state.loading) {
+            this.setState({
+                loading: true,
+                message: ''
+            }, () => {
+                this.fetchRes(newPageNum, this.state.query)
+            })
+        }
+    }
+
     render(){
-        const { query } = this.state
+        const { query, loading, message, currentPage, totalPage, totalRes } = this.state
+        const showPrev = 1 < currentPage
+        const showNext = totalPage > currentPage
         return(
             <div>
                 <header>
@@ -117,15 +139,34 @@ class Search extends React.Component<any, any> {
                                             onChange={this.onSearch}
                                         />
                                     </div>
+                                    <div className="search__feedback">
+                                        {message && <p className="msg">{ message }</p>}
+                                        {loading && <p className="loading">Loading..</p>}
+                                    </div>
                                 </div>
                             </div>
                             <div className="mltt_col-md-3">
+                                <p className={`right ${totalRes > 1 ? 'show' : 'hide'}`}>{totalRes} results found</p>
                             </div>
                         </div>
                     </div>
                 </header>
                 <main>
-                {this.renderSearch()}
+                    <Pagination 
+                        loading={loading}
+                        showPrev={showPrev}
+                        showNext={showNext}
+                        handlePrevClick={() => this.handlePageClick('prev')}
+                        handleNextClick={() => this.handlePageClick('next')}
+                    />
+                    {this.renderSearch()}
+                    <Pagination 
+                        loading={loading}
+                        showPrev={showPrev}
+                        showNext={showNext}
+                        handlePrevClick={() => this.handlePageClick('prev')}
+                        handleNextClick={() => this.handlePageClick('next')}
+                    />
                 </main>
             </div>
         )
