@@ -1,8 +1,18 @@
 import React from "react"
 
-function MovieItem() {
+import Deets from './deets/Deets'
+import Desc from './desc/Desc'
+import Poster from './others/Poster'
+import Genres from './genres/Genres'
+
+function MovieItem(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem">
+            <Deets />
+            <Poster />
+            <Genres />
+            <Desc />
+        </div>
     )
 }
 

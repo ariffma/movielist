@@ -1,8 +1,10 @@
 import React from "react"
 
-function Genre() {
+function Genre(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__genres__genre">
+            <span>Genre</span>
+        </div>
     )
 }
 

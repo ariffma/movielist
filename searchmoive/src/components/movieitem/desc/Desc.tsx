@@ -1,8 +1,14 @@
 import React from "react"
 
-function Desc() {
+import Title from './Title'
+import Release from './Release'
+
+function Desc(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__desc">
+            <Release />
+            <Title />
+        </div>
     )
 }
 

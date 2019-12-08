@@ -1,8 +1,10 @@
 import React from "react"
 
-function Poster() {
+function Poster(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__poster">
+            <img src="" alt="" /> 
+        </div>
     )
 }
 

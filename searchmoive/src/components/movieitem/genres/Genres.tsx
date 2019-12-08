@@ -1,8 +1,12 @@
 import React from "react"
 
-function Genres() {
+import Genre from "./Genre"
+
+function Genres(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__genres">
+            <Genre />
+        </div>
     )
 }
 

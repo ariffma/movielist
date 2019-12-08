@@ -1,8 +1,11 @@
 import React from "react"
+import Votes from './Votes'
 
-function Deets() {
+function Deets(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__deets">
+            <Votes />
+        </div>
     )
 }
 

@@ -1,8 +1,10 @@
 import React from "react"
 
-function Release() {
+function Release(props:any) {
     return(
-        <div></div>
+        <div className="MovieItem__desc__release">
+            <p> 0000 </p>
+        </div>
     )
 }
 
