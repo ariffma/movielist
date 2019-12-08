@@ -5,6 +5,7 @@ import MovieItem from '../movieitem/MovieItem'
 // import Pagination from './Pagination'
 
 const _url = 'https://api.themoviedb.org/3/search/movie'
+const _genre = 'https://api.themoviedb.org/3/genre/movie/list'
 const _key = '4c689ac497c39e61a5d581e40c1621d4'
 const _lang = 'en-US'
 
@@ -14,9 +15,11 @@ class Search extends React.Component<any, any> {
         this.state = {
             query: '',
             results: {},
+            genre: [],
             message: '',
             loading: false,
         }
+        this.fetchGenres()
     }
 
     fetchRes = (pageNum: number, query: string ) => {
@@ -44,6 +47,20 @@ class Search extends React.Component<any, any> {
                         message: 'Error'
                     })
                 }
+            })
+    }
+
+    fetchGenres = () => {
+        const urlGenre = `${_genre}?api_key=${_key}&language=${_lang}`
+        let cancel = axios.CancelToken.source()
+        
+        axios.get(urlGenre, {
+            cancelToken: cancel.token
+        })
+            .then((res:any) => {
+                this.setState({
+                    genre: res.data.genres
+                })
             })
     }
 
@@ -84,6 +101,7 @@ class Search extends React.Component<any, any> {
     }
 
     render(){
+        const { query } = this.state
         return(
             <div>
                 <header>
@@ -94,6 +112,7 @@ class Search extends React.Component<any, any> {
                                     <div className="search__field">
                                         <input 
                                             type='text'
+                                            value={query}
                                             name='query'
                                             id='searchInput' 
                                             placeholder='Search Movies'
